@@ -16,6 +16,8 @@ namespace War.io.Shooting
 
         [SerializeField] private Transform bulletSpawnPosition;
 
+        [SerializeField] private float damage = 2f;
+
         public void Shoot(Vector3 targetPoint)
         {
             var position = bulletSpawnPosition.position;
@@ -25,7 +27,7 @@ namespace War.io.Shooting
             target.y = 0;
             target.Normalize();
             
-            bullet.Initialise(target, bulletFlySpeed, bulletMaxFlyDistance);
+            bullet.Initialise(target, bulletFlySpeed, bulletMaxFlyDistance, damage);
         }
     }
 }

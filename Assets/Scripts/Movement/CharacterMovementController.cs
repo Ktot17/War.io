@@ -12,17 +12,9 @@ namespace War.io.Movement
         [SerializeField] private float maxRadiansDelta = 10f;
         private float _currentSpeed;
         
-        public Vector3 Direction { get; set; }
-        public bool Sprint
-        {
-            set
-            {
-                if (value)
-                    _currentSpeed = speed + speedCoefficient;
-                else
-                    _currentSpeed = speed;
-            }
-        }
+        public Vector3 LookDirection { get; set; }
+        
+        public Vector3 MovementDirection { get; set; }
 
         private CharacterController _characterController;
 
@@ -35,28 +27,36 @@ namespace War.io.Movement
         {
             Translate();
             
-            if (maxRadiansDelta > 0f && Direction != Vector3.zero)
+            if (maxRadiansDelta > 0f && LookDirection != Vector3.zero)
                 Rotate();
         }
 
         private void Translate()
         {
-            var delta = Direction * (_currentSpeed * Time.deltaTime);
+            var delta = MovementDirection * (_currentSpeed * Time.deltaTime);
             _characterController.Move(delta);
         }
 
         private void Rotate()
         {
             var currentLookDirection = transform.rotation * Vector3.forward;
-            var sqrMagnitude = (currentLookDirection - Direction).sqrMagnitude;
+            var sqrMagnitude = (currentLookDirection - LookDirection).sqrMagnitude;
 
-            if (!(sqrMagnitude > SqrEpsilon)) return;
+            if (sqrMagnitude <= SqrEpsilon) return;
             var newRotation = Quaternion.Slerp(
                 transform.rotation,
-                Quaternion.LookRotation(Direction, Vector3.up),
+                Quaternion.LookRotation(LookDirection, Vector3.up),
                 maxRadiansDelta * Time.deltaTime);
 
             transform.rotation = newRotation;
+        }
+
+        public void SetSprint(bool isSprinting)
+        {
+            if (isSprinting)
+                _currentSpeed = speed * speedCoefficient;
+            else
+                _currentSpeed = speed;
         }
     }
 }
