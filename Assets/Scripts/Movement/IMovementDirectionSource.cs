@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace War.io
+namespace War.io.Movement
 {
     public interface IMovementDirectionSource
     {

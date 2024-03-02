@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace War.io
+namespace War.io.Movement
 {
     [RequireComponent(typeof(CharacterController))]
     public class CharacterMovementController : MonoBehaviour
     {
         private static readonly float SqrEpsilon = Mathf.Epsilon * Mathf.Epsilon;
         
-        [SerializeField] private float _speed = 5f;
-        [SerializeField] private float _speedCoefficient = 3f;
-        [SerializeField] private float _maxRadiansDelta = 10f;
+        [SerializeField] private float speed = 5f;
+        [SerializeField] private float speedCoefficient = 3f;
+        [SerializeField] private float maxRadiansDelta = 10f;
         private float _currentSpeed;
         
         public Vector3 Direction { get; set; }
@@ -18,9 +18,9 @@ namespace War.io
             set
             {
                 if (value)
-                    _currentSpeed = _speed + _speedCoefficient;
+                    _currentSpeed = speed + speedCoefficient;
                 else
-                    _currentSpeed = _speed;
+                    _currentSpeed = speed;
             }
         }
 
@@ -35,7 +35,7 @@ namespace War.io
         {
             Translate();
             
-            if (_maxRadiansDelta > 0f && Direction != Vector3.zero)
+            if (maxRadiansDelta > 0f && Direction != Vector3.zero)
                 Rotate();
         }
 
@@ -54,7 +54,7 @@ namespace War.io
             var newRotation = Quaternion.Slerp(
                 transform.rotation,
                 Quaternion.LookRotation(Direction, Vector3.up),
-                _maxRadiansDelta * Time.deltaTime);
+                maxRadiansDelta * Time.deltaTime);
 
             transform.rotation = newRotation;
         }
