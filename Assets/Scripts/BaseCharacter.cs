@@ -13,6 +13,7 @@ namespace War.io
         [SerializeField] private float health = 2f;
         
         private IMovementDirectionSource _movementDirectionSource;
+        private ISprintingSource _sprintingSource;
         
         private CharacterMovementController _characterMovementController;
         private ShootingController _shootingController;
@@ -20,6 +21,7 @@ namespace War.io
         protected void Awake()
         {
             _movementDirectionSource = GetComponent<IMovementDirectionSource>();
+            _sprintingSource = GetComponent<ISprintingSource>();
             
             _characterMovementController = GetComponent<CharacterMovementController>();
             _shootingController = GetComponent<ShootingController>();
@@ -39,7 +41,7 @@ namespace War.io
             _characterMovementController.MovementDirection = direction;
             _characterMovementController.LookDirection = lookDirection;
 
-            _characterMovementController.SetSprint(Input.GetKey(KeyCode.Space));
+            _characterMovementController.SetSprint(_sprintingSource.IsSprinting);
             
             if (health <= 0f)
                 Destroy(gameObject);
