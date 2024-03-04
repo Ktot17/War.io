@@ -47,7 +47,7 @@ namespace War.io.Shooting
 
             var size = Physics.OverlapSphereNonAlloc(position, radius, _colliders, mask);
 
-            if (size > 0)
+            if (size > 1)
             {
                 for (var i = 0; i < size; ++i)
                 {
