@@ -12,16 +12,26 @@ namespace War.io.Camera
         protected void Awake()
         {
             if (playerCharacter == null)
-                throw new NullReferenceException(
-                    $"Follow camera can't follow null player - {nameof(playerCharacter)}");
+            {
+                var exception = new NullReferenceException(
+                    $"Follow camera can't follow null player - {nameof(playerCharacter)}")
+                {
+                    HelpLink = null,
+                    Source = null
+                };
+                throw exception;
+            }
         }
 
         protected void LateUpdate()
         {
-            var targetRotation = rotationOffset - followCameraOffset;
+            if (playerCharacter)
+            {
+                var targetRotation = rotationOffset - followCameraOffset;
 
-            transform.position = playerCharacter.transform.position + followCameraOffset;
-            transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
+                transform.position = playerCharacter.transform.position + followCameraOffset;
+                transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
+            }
         }
     }
 }

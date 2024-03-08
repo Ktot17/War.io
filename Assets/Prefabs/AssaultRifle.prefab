@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 4021896456325140470}
   - component: {fileID: 3020694946821426328}
   - component: {fileID: 8274710767785040393}
-  - component: {fileID: 7503604263789221570}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -200,29 +199,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7503604263789221570
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5893875282268381907}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &6917956833293704180
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +210,6 @@ GameObject:
   - component: {fileID: 2785915193945232887}
   - component: {fileID: 3007579349394949379}
   - component: {fileID: 2902318172442289234}
-  - component: {fileID: 7809978782228433472}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -307,29 +282,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7809978782228433472
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6917956833293704180}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7872206231041936262
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +293,7 @@ GameObject:
   - component: {fileID: 2010649689022173400}
   - component: {fileID: 7573640782976500612}
   m_Layer: 0
-  m_Name: Assault rifle
+  m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,8 +330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BulletPrefab>k__BackingField: {fileID: 6795774359545269950, guid: 82145906ffc44aa4a8ab99f4dfbfb7a0, type: 3}
   <ShootRadius>k__BackingField: 15
-  <ShootFrequencySec>k__BackingField: 0.1
+  <ShootFrequencySec>k__BackingField: 0.25
   bulletMaxFlyDistance: 30
   bulletFlySpeed: 25
   bulletSpawnPosition: {fileID: 5890305087438487720}
-  damage: 0.5
+  damage: 1
