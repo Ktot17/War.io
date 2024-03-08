@@ -31,6 +31,9 @@ namespace War.io.Shooting
 
         public void SetWeapon(Weapon weaponPrefab, Transform hand)
         {
+            if (_weapon)
+                Destroy(_weapon.gameObject);
+            
             _weapon = Instantiate(weaponPrefab, hand);
             var weaponTransform = _weapon.transform;
             weaponTransform.localPosition = Vector3.zero;

@@ -10,6 +10,7 @@ namespace War.io.Movement
         [SerializeField] private float speed = 5f;
         [SerializeField] private float speedCoefficient = 3f;
         [SerializeField] private float maxRadiansDelta = 10f;
+        private float _bonusCoefficient = 1f;
         private float _currentSpeed;
         
         public Vector3 LookDirection { get; set; }
@@ -54,9 +55,14 @@ namespace War.io.Movement
         public void SetSprint(bool isSprinting)
         {
             if (isSprinting)
-                _currentSpeed = speed * speedCoefficient;
+                _currentSpeed = speed * speedCoefficient * _bonusCoefficient;
             else
-                _currentSpeed = speed;
+                _currentSpeed = speed * _bonusCoefficient;
+        }
+
+        public void BonusSpeed(float bonus)
+        {
+            _bonusCoefficient = bonus;
         }
     }
 }
