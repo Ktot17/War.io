@@ -1,12 +1,14 @@
 using UnityEngine;
 using War.io.Movement;
+using War.io.PickUp;
+using War.io.PowerUp;
 using War.io.Shooting;
 
 namespace War.io
 {
     [RequireComponent(typeof(CharacterMovementController),
         typeof(ShootingController))]
-    public class BaseCharacter : MonoBehaviour
+    public abstract class BaseCharacter : MonoBehaviour
     {
         [SerializeField] private Weapon baseWeaponPrefab;
         [SerializeField] private Transform hand;
@@ -17,6 +19,8 @@ namespace War.io
         
         private CharacterMovementController _characterMovementController;
         private ShootingController _shootingController;
+
+        private Bonus _currentBonus;
     
         protected void Awake()
         {
@@ -29,7 +33,7 @@ namespace War.io
 
         protected void Start()
         {
-            _shootingController.SetWeapon(baseWeaponPrefab, hand);
+            SetWeapon(baseWeaponPrefab);
         }
 
         protected void Update()
@@ -49,15 +53,43 @@ namespace War.io
 
         protected void OnTriggerEnter(Collider other)
         {
-            if (LayerUtils.IsBullet(other.gameObject))
+            var otherGameObject = other.gameObject;
+            if (LayerUtils.IsBullet(otherGameObject))
             {
-                var otherGameObject = other.gameObject;
                 var bullet = otherGameObject.GetComponent<Bullet>();
                 
                 health -= bullet.Damage;
                 
                 Destroy(otherGameObject);
             }
+            else if (LayerUtils.IsPickUp(otherGameObject))
+            {
+                var pickUp = otherGameObject.GetComponent<PickUpItem>();
+                pickUp.PickUp(this);
+                
+                Destroy(otherGameObject);
+            }
+        }
+
+        public void SetWeapon(Weapon weapon)
+        {
+            _shootingController.SetWeapon(weapon, hand);
+        }
+
+        public void SetBonus(Bonus bonus, bool isActive)
+        {
+            if (isActive)
+            {
+                if (_currentBonus && _currentBonus.Type == bonus.Type)
+                    Destroy(_currentBonus.gameObject);
+                _currentBonus = Instantiate(bonus);
+                _currentBonus.Character = this;
+                if (_currentBonus.Type == BonusType.Speed)
+                    _characterMovementController.BonusSpeed(bonus.Coefficient);
+            }
+            else
+                if (_currentBonus.Type == BonusType.Speed)
+                    _characterMovementController.BonusSpeed(1f);
         }
     }
 }
