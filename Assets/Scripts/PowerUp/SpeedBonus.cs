@@ -17,8 +17,8 @@ namespace War.io.PowerUp
 
         protected override void DeactivateBonus()
         {
-            base.DeactivateBonus();
             Character.BonusSpeed(1f);
+            base.DeactivateBonus();
         }
     }
 }

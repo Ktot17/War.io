@@ -13,7 +13,7 @@ namespace War.io.PowerUp
 
         protected virtual void DeactivateBonus()
         {
-            
+            Character = null;
         }
     }
 }
