@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace War.io.Movement
 {
@@ -8,9 +9,9 @@ namespace War.io.Movement
         private static readonly float SqrEpsilon = Mathf.Epsilon * Mathf.Epsilon;
         
         [SerializeField] private float speed = 5f;
-        [SerializeField] private float speedCoefficient = 3f;
+        [FormerlySerializedAs("speedCoefficient")] [SerializeField] private float sprintCoefficient = 3f;
         [SerializeField] private float maxRadiansDelta = 10f;
-        private float _bonusCoefficient = 1f;
+        private float _bonusSpeed;
         private float _currentSpeed;
         
         public Vector3 LookDirection { get; set; }
@@ -22,6 +23,8 @@ namespace War.io.Movement
         protected void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+
+            _bonusSpeed = speed;
         }
 
         protected void Update()
@@ -55,14 +58,19 @@ namespace War.io.Movement
         public void SetSprint(bool isSprinting)
         {
             if (isSprinting)
-                _currentSpeed = speed * speedCoefficient * _bonusCoefficient;
+                _currentSpeed = _bonusSpeed * sprintCoefficient;
             else
-                _currentSpeed = speed * _bonusCoefficient;
+                _currentSpeed = _bonusSpeed;
         }
 
-        public void BonusSpeed(float bonus)
+        public void MultiplySpeed(float bonus)
         {
-            _bonusCoefficient = bonus;
+            _bonusSpeed *= bonus;
+        }
+
+        public void ResetSpeed()
+        {
+            _bonusSpeed = speed;
         }
     }
 }

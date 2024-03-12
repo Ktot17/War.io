@@ -74,9 +74,14 @@ namespace War.io
             _shootingController.SetWeapon(weapon, hand);
         }
 
-        public void BonusSpeed(float bonus)
+        public void MultiplySpeed(float bonus)
         {
-            _characterMovementController.BonusSpeed(bonus);
+            _characterMovementController.MultiplySpeed(bonus);
+        }
+
+        public void ResetSpeed()
+        {
+            _characterMovementController.ResetSpeed();
         }
 
         public void SetBonus(Bonus bonus)
