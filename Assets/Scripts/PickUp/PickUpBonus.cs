@@ -10,7 +10,7 @@ namespace War.io.PickUp
         public override void PickUp(BaseCharacter character)
         {
             base.PickUp(character);
-            character.SetBonus(bonusPrefab, true);
+            character.SetBonus(bonusPrefab);
         }
     }
 }

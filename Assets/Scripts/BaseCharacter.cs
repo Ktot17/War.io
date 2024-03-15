@@ -19,8 +19,6 @@ namespace War.io
         
         private CharacterMovementController _characterMovementController;
         private ShootingController _shootingController;
-
-        private Bonus _currentBonus;
     
         protected void Awake()
         {
@@ -76,20 +74,19 @@ namespace War.io
             _shootingController.SetWeapon(weapon, hand);
         }
 
-        public void SetBonus(Bonus bonus, bool isActive)
+        public void MultiplySpeed(float bonus)
         {
-            if (isActive)
-            {
-                if (_currentBonus && _currentBonus.Type == bonus.Type)
-                    Destroy(_currentBonus.gameObject);
-                _currentBonus = Instantiate(bonus);
-                _currentBonus.Character = this;
-                if (_currentBonus.Type == BonusType.Speed)
-                    _characterMovementController.BonusSpeed(bonus.Coefficient);
-            }
-            else
-                if (_currentBonus.Type == BonusType.Speed)
-                    _characterMovementController.BonusSpeed(1f);
+            _characterMovementController.MultiplySpeed(bonus);
+        }
+
+        public void ResetSpeed()
+        {
+            _characterMovementController.ResetSpeed();
+        }
+
+        public void SetBonus(Bonus bonus)
+        {
+            bonus.ActivateBonus(this);
         }
     }
 }

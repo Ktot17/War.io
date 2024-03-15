@@ -2,37 +2,18 @@
 
 namespace War.io.PowerUp
 {
-    public enum BonusType
+    public abstract class Bonus : MonoBehaviour
     {
-        Speed
-    }
-    public class Bonus : MonoBehaviour
-    {
-        [SerializeField] private float durationSeconds = 10f;
-        [field: SerializeField]
-        public float Coefficient { get; private set; } = 2f;
-
-        [field: SerializeField]
-        public BonusType Type { get; private set; } = BonusType.Speed;
+        protected BaseCharacter Character;
         
-        public BaseCharacter Character { get; set; }
-
-        private float _currentDurationSeconds;
-
-        protected void Update()
+        public virtual void ActivateBonus(BaseCharacter character)
         {
-            if (Character)
-            {
-                _currentDurationSeconds += Time.deltaTime;
+            Character = character;
+        }
 
-                if (_currentDurationSeconds > durationSeconds)
-                {
-                    _currentDurationSeconds = 0f;
-                    Character.SetBonus(this, false);
-                    Destroy(gameObject);
-                    Character = null;
-                }
-            }
+        protected virtual void DeactivateBonus()
+        {
+            Character = null;
         }
     }
 }

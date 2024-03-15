@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2789280622711355773}
-  - component: {fileID: 4334232308272106427}
+  - component: {fileID: 8143918495117724128}
   m_Layer: 0
   m_Name: SpeedBonus
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4334232308272106427
+--- !u!114 &8143918495117724128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6708907698213609378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c39f09c0b542cbb890578fee99e213, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ff1b8824acb4fe3976464eddf692511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationSeconds: 10
-  <Coefficient>k__BackingField: 2
-  <Type>k__BackingField: 0
+  durationSeconds: 1
+  coefficient: 2
