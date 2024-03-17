@@ -30,6 +30,7 @@ namespace War.io.Enemy
 
         protected void Update()
         {
+            _target.Player = FindObjectOfType<PlayerCharacter>();
             _target.FindClosest();
             _stateMachine.Update();
         }

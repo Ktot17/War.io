@@ -8,14 +8,14 @@ namespace War.io.Enemy
 
         private readonly float _viewRadius;
         private readonly EnemyCharacter _agent;
-        private readonly PlayerCharacter _player;
+        public PlayerCharacter Player { get; set; }
         
         private readonly Collider[] _colliders = new Collider[10];
 
         public EnemyTarget(EnemyCharacter agent, PlayerCharacter player, float viewRadius)
         {
             _agent = agent;
-            _player = player;
+            Player = player;
             _viewRadius = viewRadius;
         }
 
@@ -23,7 +23,7 @@ namespace War.io.Enemy
         {
             var minDistance = float.MaxValue;
 
-            var count = FindAllTargets(LayerUtils.PickUpsMask | LayerUtils.CharacterMask);
+            var count = FindAllTargets(LayerUtils.PickUpsMask | LayerUtils.PlayerMask);
 
             for (var i = 0; i < count; i++)
             {
@@ -42,8 +42,8 @@ namespace War.io.Enemy
                 }
             }
 
-            if (_player != null && DistanceFromAgentTo(_player.gameObject) < minDistance)
-                Closest = _player.gameObject;
+            if (Player != null && DistanceFromAgentTo(Player.gameObject) < minDistance)
+                Closest = Player.gameObject;
         }
 
         public float DistanceToClosestFromAgent()
@@ -70,7 +70,9 @@ namespace War.io.Enemy
 
         public bool IsTargetPlayer()
         {
-            return _player.gameObject == Closest;
+            if (Player)
+                return Player.gameObject == Closest;
+            return false;
         }
     }
 }

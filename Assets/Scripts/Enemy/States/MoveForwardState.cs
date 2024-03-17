@@ -18,12 +18,15 @@ namespace War.io.Enemy.States
         
         public override void Execute()
         {
-            var targetPosition = _target.Closest.transform.position;
-
-            if (_currentPoint != targetPosition)
+            if (_target.Closest != null)
             {
-                _currentPoint = targetPosition;
-                _enemyDirectionController.UpdateMovementDirection(targetPosition);
+                var targetPosition = _target.Closest.transform.position;
+
+                if (_currentPoint != targetPosition)
+                {
+                    _currentPoint = targetPosition;
+                    _enemyDirectionController.UpdateMovementDirection(targetPosition);
+                }
             }
         }
     }

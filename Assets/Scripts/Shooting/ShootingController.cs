@@ -42,6 +42,8 @@ namespace War.io.Shooting
 
         private GameObject GetTarget()
         {
+            var minDistance = float.MaxValue;
+            
             GameObject target = null;
 
             var position = _weapon.transform.position;
@@ -54,9 +56,11 @@ namespace War.io.Shooting
             {
                 for (var i = 0; i < size; ++i)
                 {
-                    if (_colliders[i].gameObject != gameObject && _colliders[i].gameObject.layer != gameObject.layer)
+                    var go = _colliders[i].gameObject;
+                    var distance = (transform.position - go.transform.position).magnitude;
+                    if (go.layer != gameObject.layer && distance < minDistance)
                     {
-                        target = _colliders[i].gameObject;
+                        target = go;
                         break;
                     }
                 }

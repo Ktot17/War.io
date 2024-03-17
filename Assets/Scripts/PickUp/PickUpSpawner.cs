@@ -4,33 +4,23 @@ using Random = UnityEngine.Random;
 
 namespace War.io.PickUp
 {
-    public class PickUpSpawner : MonoBehaviour
+    public class PickUpSpawner : BaseSpawner
     {
         [SerializeField] private PickUpItem pickUpPrefab;
-        [SerializeField] private float range = 2f;
         [SerializeField] private int maxCount = 2;
-        [SerializeField] private float minSpawnIntervalSeconds = 2f;
-        [SerializeField] private float maxSpawnIntervalSeconds = 10f;
 
-        private float _currentSpawnIntervalSeconds;
-        private float _currentSpawnTimerSeconds;
         private int _currentCount;
-
-        protected void Awake()
-        {
-            _currentSpawnIntervalSeconds = Random.Range(minSpawnIntervalSeconds, maxSpawnIntervalSeconds);
-        }
 
         protected void Update()
         {
             if (_currentCount < maxCount)
             {
-                _currentSpawnTimerSeconds += Time.deltaTime;
+                CurrentSpawnTimerSeconds += Time.deltaTime;
 
-                if (_currentSpawnTimerSeconds > _currentSpawnIntervalSeconds)
+                if (CurrentSpawnTimerSeconds > CurrentSpawnIntervalSeconds)
                 {
-                    _currentSpawnTimerSeconds = 0f;
-                    _currentSpawnIntervalSeconds = Random.Range(minSpawnIntervalSeconds, maxSpawnIntervalSeconds);
+                    CurrentSpawnTimerSeconds = 0f;
+                    CurrentSpawnIntervalSeconds = Random.Range(minSpawnIntervalSeconds, maxSpawnIntervalSeconds);
                     _currentCount++;
 
                     var randomPointInsideRange = Random.insideUnitCircle * range;
@@ -48,7 +38,7 @@ namespace War.io.PickUp
             _currentCount--;
             pickedUpItem.OnPickedUp -= OnItemPickedUp;
         }
-
+        
         protected void OnDrawGizmos()
         {
             var cashedColor = Handles.color;

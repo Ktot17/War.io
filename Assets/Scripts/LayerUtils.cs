@@ -15,6 +15,7 @@ namespace War.io
         public static readonly int BonusPickUpLayer = LayerMask.NameToLayer(BonusPickUpLayerName);
 
         public static readonly int CharacterMask = LayerMask.GetMask(EnemyLayerName, PlayerLayerName);
+        public static readonly int PlayerMask = LayerMask.GetMask(PlayerLayerName);
         public static readonly int PickUpsMask = LayerMask.GetMask(WeaponPickUpLayerName, BonusPickUpLayerName);
 
         public static bool IsBullet(GameObject other) => other.layer == BulletLayer;

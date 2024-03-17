@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace War.io.Camera
 {
@@ -9,20 +8,6 @@ namespace War.io.Camera
         [SerializeField] private Vector3 rotationOffset = Vector3.zero;
         [SerializeField] private PlayerCharacter playerCharacter;
 
-        protected void Awake()
-        {
-            if (playerCharacter == null)
-            {
-                var exception = new NullReferenceException(
-                    $"Follow camera can't follow null player - {nameof(playerCharacter)}")
-                {
-                    HelpLink = null,
-                    Source = null
-                };
-                throw exception;
-            }
-        }
-
         protected void LateUpdate()
         {
             if (playerCharacter)
@@ -31,6 +16,10 @@ namespace War.io.Camera
 
                 transform.position = playerCharacter.transform.position + followCameraOffset;
                 transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
+            }
+            else
+            {
+                playerCharacter = FindObjectOfType<PlayerCharacter>();
             }
         }
     }
