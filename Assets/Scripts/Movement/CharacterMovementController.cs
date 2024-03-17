@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace War.io.Movement
 {
@@ -9,7 +8,7 @@ namespace War.io.Movement
         private static readonly float SqrEpsilon = Mathf.Epsilon * Mathf.Epsilon;
         
         [SerializeField] private float speed = 5f;
-        [FormerlySerializedAs("speedCoefficient")] [SerializeField] private float sprintCoefficient = 3f;
+        [SerializeField] private float sprintCoefficient = 3f;
         [SerializeField] private float maxRadiansDelta = 10f;
         private float _bonusSpeed;
         private float _currentSpeed;

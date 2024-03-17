@@ -65,5 +65,10 @@ namespace War.io.Enemy
 
         private float DistanceFromAgentTo(GameObject go) =>
             (_agentTransform.position - go.transform.position).magnitude;
+
+        public bool IsTargetPlayer()
+        {
+            return _player.gameObject == Closest;
+        }
     }
 }

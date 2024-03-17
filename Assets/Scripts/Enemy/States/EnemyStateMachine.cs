@@ -7,12 +7,15 @@ namespace War.io.Enemy.States
     {
         private const float NavMeshTurnOffDistance = 5f;
 
-        public EnemyStateMachine(EnemyDirectionController enemyDirectionController, NavMesher navMesher,
-            EnemyTarget target)
+        public EnemyStateMachine(EnemyCharacter enemy, EnemyDirectionController enemyDirectionController, 
+            EnemySprintingController enemySprintingController,
+            NavMesher navMesher, EnemyTarget target)
         {
-            var idleState = new IdleState();
+            var idleState = new IdleState(enemySprintingController);
             var findWayState = new FindWayState(target, navMesher, enemyDirectionController);
             var moveForwardState = new MoveForwardState(target, enemyDirectionController);
+            var runAwayState = new RunAwayState(target, enemyDirectionController, 
+                enemySprintingController);
 
             SetInitialState(idleState);
 
@@ -23,7 +26,11 @@ namespace War.io.Enemy.States
                     () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance),
                 new Transition(
                     moveForwardState,
-                    () => target.DistanceToClosestFromAgent() <= NavMeshTurnOffDistance)
+                    () => target.DistanceToClosestFromAgent() <= NavMeshTurnOffDistance),
+                new Transition(
+                    runAwayState,
+                    () => enemy.GetHealthPercent() <= enemy.RunAwayHealthPercent && 
+                          enemy.DecidesToRun && target.IsTargetPlayer())
             });
             
             AddState(state: findWayState, transitions: new List<Transition>
@@ -43,7 +50,18 @@ namespace War.io.Enemy.States
                     () => target.Closest == null),
                 new Transition(
                     findWayState,
-                    () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance)
+                    () => target.DistanceToClosestFromAgent() > NavMeshTurnOffDistance),
+                new Transition(
+                    runAwayState,
+                    () => enemy.GetHealthPercent() <= enemy.RunAwayHealthPercent && 
+                          enemy.DecidesToRun && target.IsTargetPlayer())
+            });
+            
+            AddState(state: runAwayState, transitions: new List<Transition>
+            {
+                new Transition(
+                    idleState,
+                    () => !target.IsTargetPlayer())
             });
         }
     }

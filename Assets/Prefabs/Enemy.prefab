@@ -129,9 +129,9 @@ GameObject:
   - component: {fileID: 6830321495025255032}
   - component: {fileID: 3413310375401260849}
   - component: {fileID: 4530251396823632837}
-  - component: {fileID: 8265554186273557582}
   - component: {fileID: 8885025133901049269}
   - component: {fileID: 1375304426948229836}
+  - component: {fileID: 1722696971411937759}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -274,18 +274,8 @@ MonoBehaviour:
   baseWeaponPrefab: {fileID: 6073866126527888059, guid: fcc834f2124459847ae762e14fefeb96, type: 3}
   hand: {fileID: 7052621301229911132}
   health: 10
---- !u!114 &8265554186273557582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7060634367274626812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4bc57189e149e893b9af4034ef4ba7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  <RunAwayHealthPercent>k__BackingField: 30
+  <RunAwayPercent>k__BackingField: 70
 --- !u!114 &8885025133901049269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,4 +300,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df8c0afe966488a90f95500f945fa68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 20
+  viewRadius: 10
+--- !u!114 &1722696971411937759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060634367274626812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443f899c4bf947bc961839655b2b6143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
