@@ -7,14 +7,14 @@ namespace War.io.Enemy
         public GameObject Closest { get; private set; }
 
         private readonly float _viewRadius;
-        private readonly Transform _agentTransform;
+        private readonly EnemyCharacter _agent;
         private readonly PlayerCharacter _player;
         
         private readonly Collider[] _colliders = new Collider[10];
 
-        public EnemyTarget(Transform agent, PlayerCharacter player, float viewRadius)
+        public EnemyTarget(EnemyCharacter agent, PlayerCharacter player, float viewRadius)
         {
-            _agentTransform = agent;
+            _agent = agent;
             _player = player;
             _viewRadius = viewRadius;
         }
@@ -29,7 +29,9 @@ namespace War.io.Enemy
             {
                 var go = _colliders[i].gameObject;
                 
-                if (go == _agentTransform.gameObject) continue;
+                if (go == _agent.gameObject) continue;
+                
+                if (LayerUtils.IsWeaponPickUp(go) && !_agent.HasBaseWeapon()) continue;
 
                 var distance = DistanceFromAgentTo(go);
 
@@ -55,7 +57,7 @@ namespace War.io.Enemy
         private int FindAllTargets(int layerMask)
         {
             var size = Physics.OverlapSphereNonAlloc(
-                _agentTransform.position,
+                _agent.transform.position,
                 _viewRadius,
                 _colliders,
                 layerMask);
@@ -64,7 +66,7 @@ namespace War.io.Enemy
         }
 
         private float DistanceFromAgentTo(GameObject go) =>
-            (_agentTransform.position - go.transform.position).magnitude;
+            (_agent.transform.position - go.transform.position).magnitude;
 
         public bool IsTargetPlayer()
         {

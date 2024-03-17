@@ -22,7 +22,7 @@ namespace War.io.Enemy
             
             var navMesher = new NavMesher(transform);
 
-            _target = new EnemyTarget(transform, player, viewRadius);
+            _target = new EnemyTarget(enemy, player, viewRadius);
             
             _stateMachine = new EnemyStateMachine(enemy, enemyDirectionController, 
                 enemySprintingController, navMesher, _target);
