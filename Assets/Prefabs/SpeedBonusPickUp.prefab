@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9096291153601747858}
   - component: {fileID: 6991877860877452368}
   - component: {fileID: 2920213789127661873}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7268997914735427313}
   - component: {fileID: 2801486145052186278}
   - component: {fileID: 4242004668463259803}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: SpeedBonusPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

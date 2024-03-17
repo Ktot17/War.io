@@ -7,14 +7,20 @@ namespace War.io
         public const string BulletLayerName = "Bullet";
         public const string EnemyLayerName = "Enemy";
         public const string PlayerLayerName = "Player";
-        public const string PickUpLayerName = "PickUp";
+        public const string WeaponPickUpLayerName = "WeaponPickUp";
+        public const string BonusPickUpLayerName = "BonusPickUp";
 
         public static readonly int BulletLayer = LayerMask.NameToLayer(BulletLayerName);
-        public static readonly int PickUpLayer = LayerMask.NameToLayer(PickUpLayerName);
+        public static readonly int WeaponPickUpLayer = LayerMask.NameToLayer(WeaponPickUpLayerName);
+        public static readonly int BonusPickUpLayer = LayerMask.NameToLayer(BonusPickUpLayerName);
 
         public static readonly int CharacterMask = LayerMask.GetMask(EnemyLayerName, PlayerLayerName);
+        public static readonly int PickUpsMask = LayerMask.GetMask(WeaponPickUpLayerName, BonusPickUpLayerName);
 
         public static bool IsBullet(GameObject other) => other.layer == BulletLayer;
-        public static bool IsPickUp(GameObject other) => other.layer == PickUpLayer;
+        public static bool IsPickUp(GameObject other) => other.layer == WeaponPickUpLayer || 
+                                                         other.layer == BonusPickUpLayer;
+
+        public static bool IsWeaponPickUp(GameObject other) => other.layer == WeaponPickUpLayer;
     }
 }

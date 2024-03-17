@@ -19,6 +19,9 @@ namespace War.io
         
         private CharacterMovementController _characterMovementController;
         private ShootingController _shootingController;
+
+        private float _currentHealth;
+        private Weapon _currentWeapon;
     
         protected void Awake()
         {
@@ -27,14 +30,17 @@ namespace War.io
             
             _characterMovementController = GetComponent<CharacterMovementController>();
             _shootingController = GetComponent<ShootingController>();
+
+            _currentHealth = health;
+            _currentWeapon = baseWeaponPrefab;
         }
 
         protected void Start()
         {
-            SetWeapon(baseWeaponPrefab);
+            SetWeapon(_currentWeapon);
         }
 
-        protected void Update()
+        protected virtual void Update()
         {
             var direction = _movementDirectionSource.MovementDirection;
             var lookDirection = direction;
@@ -45,7 +51,7 @@ namespace War.io
 
             _characterMovementController.SetSprint(_sprintingSource.IsSprinting);
             
-            if (health <= 0f)
+            if (_currentHealth <= 0f)
                 Destroy(gameObject);
         }
 
@@ -56,7 +62,7 @@ namespace War.io
             {
                 var bullet = otherGameObject.GetComponent<Bullet>();
                 
-                health -= bullet.Damage;
+                _currentHealth -= bullet.Damage;
                 
                 Destroy(otherGameObject);
             }
@@ -72,6 +78,7 @@ namespace War.io
         public void SetWeapon(Weapon weapon)
         {
             _shootingController.SetWeapon(weapon, hand);
+            _currentWeapon = weapon;
         }
 
         public void MultiplySpeed(float bonus)
@@ -87,6 +94,16 @@ namespace War.io
         public void SetBonus(Bonus bonus)
         {
             bonus.ActivateBonus(this);
+        }
+
+        public float GetHealthPercent()
+        {
+            return _currentHealth / health * 100f;
+        }
+
+        public bool HasBaseWeapon()
+        {
+            return _currentWeapon == baseWeaponPrefab;
         }
     }
 }

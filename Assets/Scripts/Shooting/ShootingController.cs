@@ -54,9 +54,10 @@ namespace War.io.Shooting
             {
                 for (var i = 0; i < size; ++i)
                 {
-                    if (_colliders[i].gameObject != gameObject && _colliders[i].gameObject.layer != gameObject.layer)
+                    var go = _colliders[i].gameObject;
+                    if (go != gameObject)
                     {
-                        target = _colliders[i].gameObject;
+                        target = go;
                         break;
                     }
                 }
