@@ -23,7 +23,7 @@ namespace War.io.Enemy
         {
             var minDistance = float.MaxValue;
 
-            var count = FindAllTargets(LayerUtils.PickUpsMask | LayerUtils.PlayerMask);
+            var count = FindAllTargets(LayerUtils.PickUpsMask | LayerUtils.CharacterMask);
 
             for (var i = 0; i < count; i++)
             {
