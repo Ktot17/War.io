@@ -30,7 +30,7 @@ namespace War.io.Enemy.States
                 new Transition(
                     runAwayState,
                     () => enemy.GetHealthPercent() <= enemy.RunAwayHealthPercent && 
-                          enemy.DecidesToRun && target.IsTargetPlayer())
+                          enemy.DecidesToRun() && target.IsTargetCharacter())
             });
             
             AddState(state: findWayState, transitions: new List<Transition>
@@ -54,14 +54,14 @@ namespace War.io.Enemy.States
                 new Transition(
                     runAwayState,
                     () => enemy.GetHealthPercent() <= enemy.RunAwayHealthPercent && 
-                          enemy.DecidesToRun && target.IsTargetPlayer())
+                          enemy.DecidesToRun() && target.IsTargetCharacter())
             });
             
             AddState(state: runAwayState, transitions: new List<Transition>
             {
                 new Transition(
                     idleState,
-                    () => !target.IsTargetPlayer())
+                    () => !target.IsTargetCharacter())
             });
         }
     }
