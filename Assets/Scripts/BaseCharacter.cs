@@ -40,7 +40,7 @@ namespace War.io
             SetWeapon(_currentWeapon);
         }
 
-        protected virtual void Update()
+        protected void Update()
         {
             var direction = _movementDirectionSource.MovementDirection;
             var lookDirection = direction;

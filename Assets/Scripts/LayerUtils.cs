@@ -10,6 +10,8 @@ namespace War.io
         public const string WeaponPickUpLayerName = "WeaponPickUp";
         public const string BonusPickUpLayerName = "BonusPickUp";
 
+        public static readonly int PlayerLayer = LayerMask.NameToLayer(PlayerLayerName);
+        public static readonly int EnemyLayer = LayerMask.NameToLayer(EnemyLayerName);
         public static readonly int BulletLayer = LayerMask.NameToLayer(BulletLayerName);
         public static readonly int WeaponPickUpLayer = LayerMask.NameToLayer(WeaponPickUpLayerName);
         public static readonly int BonusPickUpLayer = LayerMask.NameToLayer(BonusPickUpLayerName);
@@ -22,5 +24,8 @@ namespace War.io
                                                          other.layer == BonusPickUpLayer;
 
         public static bool IsWeaponPickUp(GameObject other) => other.layer == WeaponPickUpLayer;
+
+        public static bool IsCharacter(GameObject other) => other.layer == PlayerLayer ||
+                                                            other.layer == EnemyLayer;
     }
 }
