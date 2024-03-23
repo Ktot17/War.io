@@ -21,7 +21,8 @@ namespace War.io.PowerUp
 
         protected override void DeactivateBonus()
         {
-            Character.ResetSpeed();
+            if (Character)
+                Character.ResetSpeed();
             base.DeactivateBonus();
         }
     }
