@@ -13,6 +13,8 @@ namespace War.io
         [SerializeField] private Weapon baseWeaponPrefab;
         [SerializeField] private Transform hand;
         [SerializeField] private float health = 2f;
+        [SerializeField] private Animator animator;
+        [SerializeField] private GameObject deathAnim;
         
         private IMovementDirectionSource _movementDirectionSource;
         private ISprintingSource _sprintingSource;
@@ -42,7 +44,7 @@ namespace War.io
 
         protected void Update()
         {
-            var direction = _movementDirectionSource.MovementDirection;
+            var direction = _movementDirectionSource.MovementDirection.normalized;
             var lookDirection = direction;
             if (_shootingController.HasTarget)
                 lookDirection = (_shootingController.TargetPosition - transform.position).normalized;
@@ -51,8 +53,19 @@ namespace War.io
 
             _characterMovementController.SetSprint(_sprintingSource.IsSprinting);
             
+            animator.SetBool("IsSprinting", _sprintingSource.IsSprinting);
+            animator.SetBool("IsMoving", direction != Vector3.zero);
+            animator.SetBool("IsShooting", _shootingController.HasTarget);
+            animator.SetBool("HasBaseWeapon", HasBaseWeapon());
+            animator.SetBool("IsBackwards", 
+                Mathf.Abs(Mathf.Sign(direction.x) - Mathf.Sign(lookDirection.x)) > Mathf.Epsilon ||
+                Mathf.Abs(Mathf.Sign(direction.z) - Mathf.Sign(lookDirection.z)) > Mathf.Epsilon);
+
             if (_currentHealth <= 0f)
+            {
+                Instantiate(deathAnim, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+            }
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -60,6 +73,7 @@ namespace War.io
             var otherGameObject = other.gameObject;
             if (LayerUtils.IsBullet(otherGameObject))
             {
+                animator.SetTrigger("Hit");
                 var bullet = otherGameObject.GetComponent<Bullet>();
                 
                 _currentHealth -= bullet.Damage;
