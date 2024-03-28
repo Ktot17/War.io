@@ -192,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 5809071520713996822}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 4616182532131366308}
   - component: {fileID: 5598464853546219831}
   - component: {fileID: 7808671471042970110}
+  - component: {fileID: 4160777733067587915}
   m_Layer: 8
   m_Name: SRiflePickUp
   m_TagString: Untagged
@@ -270,6 +271,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9, y: 1, z: 3.8}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &4160777733067587915
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311400409928458382}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ab8ca76b6eed6164bbe7797d4a2e1b97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7422881479491336156
 GameObject:
   m_ObjectHideFlags: 0
